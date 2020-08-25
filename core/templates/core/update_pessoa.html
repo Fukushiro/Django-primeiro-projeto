@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+
+
+{% block conteudo %}
+    <a href="{% url 'core_lista_pessoas' %}">Voltar</a>
+    <h3>Alterar pessoa {{pessoa.nome}}</h3>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{form}}
+        <input type="submit" value="alterar">
+    </form>
+{% endblock conteudo %}

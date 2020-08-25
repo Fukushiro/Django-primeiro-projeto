@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+
+{% block conteudo %}
+    <h3>Marcas</h3>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{form}}
+        <input type="submit" value="Criar">
+    </form>
+    <table>
+        <thead>
+            <th>Nome</th>
+        </thead>
+        <tbody>
+            {% for marca in marcas %}
+                <tr>
+                    <td>
+                        {{marca.nome}}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock conteudo %}

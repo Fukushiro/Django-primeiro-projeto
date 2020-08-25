@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+
+{% block conteudo %}
+    <h3>Lista mensalista</h3>
+    <form action={% url 'core_adicionar_mensalista' %} method="post">
+        {% csrf_token %}
+        {{form}}
+        <input type="submit" value="Criar">
+    </form>
+    <table style="text-align : center">
+        <thead>
+            <td>veiculo</td>
+            <td>inicio</td>
+            <td>valor ao mes</td>
+            <td>Update</td>
+        </thead>
+        <tbody>
+            {% for mensalista in mensalistas %}
+                <tr>
+                    <td>{{mensalista.veiculo}}</td>
+                    <td>{{mensalista.inicio}}</td>
+                    <td>{{mensalista.valor_mes}}</td>
+                    <td><a href={% url 'core_update_mensalista' mensalista.id %}>Update</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock conteudo %}

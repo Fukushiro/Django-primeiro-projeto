@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+
+
+{% block conteudo %}
+    <h3>Lista movimento mensalista</h3>
+    <form action={% url 'core_adicionar_mov_mensalista' %} method="post">
+        {% csrf_token %}
+        {{form}}
+        <input type="submit" value="Criar">
+    </form>
+    <table style="text-align : center">
+        <thead>
+            <td>mensalista</td>
+            <td>data_pagamento</td>
+            <td>total</td>
+            <td>Update</td>
+        </thead>
+        <tbody>
+            {% for movimento in movimentos %}
+                <tr>
+                    <td>{{movimento.mensalista.veiculo}}</td>
+                    <td>{{movimento.data_pagamento}}</td>
+                    <td>{{movimento.total}}</td>
+                    <td><a href={% url 'core_update_mov_mensalista' movimento.id %}>Update</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock conteudo %}

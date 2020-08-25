@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+
+
+{% block conteudo %}
+    <h3>Lista veiculos</h3>
+    <form action={% url 'core_adicionar_veiculo' %} method="POST">
+        {% csrf_token %}
+        {{form}}
+        <input type="submit" value="Criar">
+    </form>
+    <table>
+        <thead>
+            <th>marca</th>
+            <th>placa</th>
+            <th>cor</th>
+            
+            <th>proprietario</th>
+            <th>Update</th>
+        </thead>
+        <tbody>
+            {% for veiculo in veiculos %}
+                <tr>
+                   <td>{{veiculo.marca}}</td>
+                   <td>{{veiculo.placa}}</td>
+                   <td>{{veiculo.cor}}</td>
+                   
+                   <td>{{veiculo.proprietario}}</td>
+                    <td><a href={% url 'core_update_veiculo' veiculo.id %}>Update</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock conteudo %}

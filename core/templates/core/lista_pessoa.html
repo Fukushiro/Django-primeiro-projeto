@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+
+{% block conteudo %}
+    <h3>Lista pessoas</h3>  
+
+    <form action={% url 'core_adicionar_pessoa' %} method="POST">
+        {% csrf_token %}
+        {{form}}
+        <input type="submit" value="Inserir">
+    </form>
+
+    <table>
+        <thead>
+            <th>Nome</th>
+            <th>Endereco</th>
+            <th>telefone</th>
+            <th>update</th>
+        </thead>
+        <tbody>
+            {% for pessoa in lista_pessoas %}
+                <tr>
+                    <td>{{pessoa.nome}}</td>
+                    <td>{{pessoa.endereco}}</td>
+                    <td>{{pessoa.telefone}}</td>
+                    <td><a href={% url 'core_update_pessoa' pessoa.id %}>Update</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock conteudo %}

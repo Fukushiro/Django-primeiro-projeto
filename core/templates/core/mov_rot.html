@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+
+{% block conteudo %}
+    <h3>Movimento rotativo</h3>
+    <form action={% url 'core_add_mov_rot' %} method="POST">
+        {% csrf_token %}
+        {{form}}
+        <input type="submit" value="Criar">
+    </form>
+    <table style="text-align : center">
+        <thead>
+            <th>checkin</th>
+            <th>checkout</th>
+            <th>valor_hora</th>
+            <th>veiculo</th>
+            <th>pago</th>
+            <th>Update</th>
+        </thead>
+        <tbody>
+            {% for movimento in movimentos %}
+                <tr>
+                    <td>{{movimento.checkin}}</td>
+                    <td>{{movimento.checkout}}</td>
+                    <td>{{movimento.valor_hora}}</td>
+                    <td>{{movimento.veiculo}}</td>
+                    <td>
+                        {% if movimento.pago %}
+                            Pago
+                        {% else %}
+                            Não pago
+                        {% endif %}
+                    </td>
+                    <td><a href= {% url 'core_update_mov_rot' movimento.id %}>Update</a></td>
+                
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock conteudo %}
