@@ -16,7 +16,8 @@ from core.views import (home,
                         update_mov_rot,
                         update_mensalista,
                         lista_marca,
-                        update_mov_mensalista)
+                        update_mov_mensalista,
+                        delete_pessoa)
 
 
 urlpatterns = [
@@ -25,6 +26,7 @@ urlpatterns = [
     path('pessoas', lista_pessoas, name='core_lista_pessoas'),
     path('adicionar_pessoa', adicionar_pessoa, name='core_adicionar_pessoa'),
     path('update_pessoa/<int:id>', update_pessoa, name='core_update_pessoa'),
+    path('delete_pessoa/<int:id>', delete_pessoa, name='core_delete_pessoa'),
     # veiculos
     path('veiculos', lista_veiculos, name='core_lista_veiculos'),
     path('adicionar_veiculo', adicionar_veiculo, name='core_adicionar_veiculo'),

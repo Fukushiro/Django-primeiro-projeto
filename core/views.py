@@ -39,7 +39,7 @@ def lista_pessoas(request):
         'lista_pessoas': pessoas,
         'form': form,
     }
-    return render(request, 'core/lista_pessoa.html', context)
+    return render(request, 'core/pessoa/lista_pessoa.html', context)
 
 
 def adicionar_pessoa(request):
@@ -65,7 +65,16 @@ def update_pessoa(request, id):
             'pessoa': pessoa,
             'form': form,
         }
-        return render(request, 'core/update_pessoa.html', context)
+        return render(request, 'core/pessoa/update_pessoa.html', context)
+
+
+def delete_pessoa(request, id):
+    pessoa = Pessoa.objects.get(id=id)
+    if request.method == 'POST':
+        pessoa.delete()
+        return redirect('core_lista_pessoas')
+    else:
+        return render(request, 'core/pessoa/delete_pessoa_confirm.html')
 # veiculos
 
 
@@ -81,7 +90,7 @@ def lista_veiculos(request):
         'veiculos': veiculos,
         'form': form,
     }
-    return render(request, 'core/lista_veiculo.html', context)
+    return render(request, 'core/veiculo/lista_veiculo.html', context)
 
 
 def adicionar_veiculo(request):
@@ -108,7 +117,7 @@ def update_veiculo(request, id):
             'veiculo': veiculo,
 
         }
-        return render(request, 'core/update_veiculo.html', context)
+        return render(request, 'core/veiculo/update_veiculo.html', context)
 
 # rotativos
 

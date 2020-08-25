@@ -16,6 +16,7 @@
             <th>Endereco</th>
             <th>telefone</th>
             <th>update</th>
+            <th>delete</th>
         </thead>
         <tbody>
             {% for pessoa in lista_pessoas %}
@@ -24,6 +25,7 @@
                     <td>{{pessoa.endereco}}</td>
                     <td>{{pessoa.telefone}}</td>
                     <td><a href={% url 'core_update_pessoa' pessoa.id %}>Update</a></td>
+                    <td><a href={% url 'core_delete_pessoa' pessoa.id %}>Delete</a></td>
                 </tr>
             {% endfor %}
         </tbody>
