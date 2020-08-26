@@ -10,10 +10,11 @@
     </form>
     <table style="text-align : center">
         <thead>
-            <td>veiculo</td>
-            <td>inicio</td>
-            <td>valor ao mes</td>
-            <td>Update</td>
+            <th>veiculo</th>
+            <th>inicio</th>
+            <th>valor ao mes</th>
+            <th>Update</th>
+            <th>Delete</th>
         </thead>
         <tbody>
             {% for mensalista in mensalistas %}
@@ -22,6 +23,7 @@
                     <td>{{mensalista.inicio}}</td>
                     <td>{{mensalista.valor_mes}}</td>
                     <td><a href={% url 'core_update_mensalista' mensalista.id %}>Update</a></td>
+                    <td><a href={% url 'core_delete_mensalista' mensalista.id %}>Delete</a></td>
                 </tr>
             {% endfor %}
         </tbody>

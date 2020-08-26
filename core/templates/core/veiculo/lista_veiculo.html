@@ -17,6 +17,7 @@
             
             <th>proprietario</th>
             <th>Update</th>
+            <th>Delete</th>
         </thead>
         <tbody>
             {% for veiculo in veiculos %}
@@ -27,6 +28,7 @@
                    
                    <td>{{veiculo.proprietario}}</td>
                     <td><a href={% url 'core_update_veiculo' veiculo.id %}>Update</a></td>
+                    <td><a href={% url 'core_delete_veiculo' veiculo.id %}>Delete</a></td>
                 </tr>
             {% endfor %}
         </tbody>

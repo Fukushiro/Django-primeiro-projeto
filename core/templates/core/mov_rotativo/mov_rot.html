@@ -16,6 +16,7 @@
             <th>veiculo</th>
             <th>pago</th>
             <th>Update</th>
+            <th>Delete</th>
         </thead>
         <tbody>
             {% for movimento in movimentos %}
@@ -32,7 +33,7 @@
                         {% endif %}
                     </td>
                     <td><a href= {% url 'core_update_mov_rot' movimento.id %}>Update</a></td>
-                
+                    <td><a href={% url 'core_delete_mov_rot' movimento.id %}>Delete</a></td>
                 </tr>
             {% endfor %}
         </tbody>

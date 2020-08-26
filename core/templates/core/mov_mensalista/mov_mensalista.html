@@ -11,10 +11,11 @@
     </form>
     <table style="text-align : center">
         <thead>
-            <td>mensalista</td>
-            <td>data_pagamento</td>
-            <td>total</td>
-            <td>Update</td>
+            <th>mensalista</th>
+            <th>data_pagamento</th>
+            <th>total</th>
+            <th>Update</th>
+            <th>Delete</th>
         </thead>
         <tbody>
             {% for movimento in movimentos %}
@@ -23,6 +24,7 @@
                     <td>{{movimento.data_pagamento}}</td>
                     <td>{{movimento.total}}</td>
                     <td><a href={% url 'core_update_mov_mensalista' movimento.id %}>Update</a></td>
+                    <td><a href={% url 'core_delete_mov_mensalista' movimento.id %}>Delete</a></td>
                 </tr>
             {% endfor %}
         </tbody>

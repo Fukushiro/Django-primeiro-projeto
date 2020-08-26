@@ -2,7 +2,7 @@
 
 {% block conteudo %}
     <a href="{% url 'core_mov_mensalista' %}">Voltar</a>
-    <h3>Atualizar mensalista</h3>
+    <h3>Atualizar movimento mensalista</h3>
     <form action="" method="post">
         {% csrf_token %}
         {{form}}
