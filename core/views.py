@@ -17,12 +17,12 @@ from core.forms import (PessoaForm,
                         MarcaForm,)
 
 from django.contrib.auth import authenticate
+from decouple import config
 import datetime
 # Create your views here.
 
 
 def home(request):
-
     context = {
         'usuario': request.user,
     }
