@@ -7,6 +7,7 @@ from core.models import (Pessoa,
                          MovMensalista,
                          Marca)
 from django.contrib.admin import widgets
+from django.contrib.auth.models import User
 # inputs
 import datetime
 
@@ -93,3 +94,20 @@ class MarcaForm(ModelForm):
     class Meta:
         model = Marca
         fields = '__all__'
+
+
+class UserFormRegister(ModelForm):
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password']
+        widgets = {
+            'password': forms.PasswordInput()
+        }
+
+    def save(self, commit=True):
+        # Save the provided password in hashed format
+        user = super(UserFormRegister, self).save(commit=False)
+        user.set_password(self.cleaned_data["password"])
+        if commit:
+            user.save()
+        return user

@@ -10,16 +10,20 @@ from core.models import (Pessoa,
                          MovMensalista,
                          Parametros,
                          Marca)
-from core.forms import (PessoaForm,
-                        VeiculoForm,
-                        MovRotForm,
-                        MensalistaForm,
-                        MovMensalistaForm,
-                        MarcaForm,)
+from core.forms import (
+    PessoaForm,
+    VeiculoForm,
+    MovRotForm,
+    MensalistaForm,
+    MovMensalistaForm,
+    MarcaForm,
+    UserFormRegister,
+)
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate
 from decouple import config
 import datetime
+from django.contrib.auth.forms import UserCreationForm
 # Create your views here.
 
 
@@ -305,3 +309,19 @@ def core_logout(request):
     logout(request)
 
     return redirect('login')
+
+
+def core_register(request):
+    if request.method == 'POST':
+        f = UserFormRegister(request.POST or None)
+
+        if f.is_valid():
+            f.save()
+        return redirect('login')
+    form = UserFormRegister()
+
+    c = {
+        'form': form,
+    }
+
+    return render(request, 'registration/register.html', c)

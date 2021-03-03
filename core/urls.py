@@ -24,6 +24,7 @@ from core.views import (
     delete_mensalista,
     delete_mov_mensalista,
     core_logout,
+    core_register,
 )
 
 
@@ -59,7 +60,7 @@ urlpatterns = [
          name='core_adicionar_mov_mensalista'),
     path('update_mov_mensalista/<int:id>', update_mov_mensalista,
          name='core_update_mov_mensalista'),
-         
+
     path('delete_mov_mensalista/<int:id>', delete_mov_mensalista,
          name='core_delete_mov_mensalista'),
     # marca
@@ -69,4 +70,5 @@ urlpatterns = [
 
     path('logout', core_logout, name='core_logout'),
 
+    path('register', core_register, name='core_register'),
 ]
