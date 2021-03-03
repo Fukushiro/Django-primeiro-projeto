@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 
 
+{% block menu %}
+    {% include 'menu.html' with ativo=4 %}
+{% endblock menu %}
 
 {% block conteudo %}
     <h3>Lista movimento mensalista</h3>

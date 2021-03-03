@@ -1,31 +1,34 @@
 
 from django.urls import path, include
-from core.views import (home,
-                        lista_pessoas,
-                        lista_veiculos,
-                        lista_mov_rot,
-                        lista_mensalista,
-                        lista_mov_mensalista,
-                        adicionar_pessoa,
-                        adicionar_veiculo,
-                        adicionar_mov_rot,
-                        add_mensalista,
-                        adicionar_mov_mensalista,
-                        update_pessoa,
-                        update_veiculo,
-                        update_mov_rot,
-                        update_mensalista,
-                        lista_marca,
-                        update_mov_mensalista,
-                        delete_pessoa,
-                        delete_veiculo,
-                        delete_mov_rot,
-                        delete_mensalista,
-                        delete_mov_mensalista)
+from core.views import (
+    home,
+    lista_pessoas,
+    lista_veiculos,
+    lista_mov_rot,
+    lista_mensalista,
+    lista_mov_mensalista,
+    adicionar_pessoa,
+    adicionar_veiculo,
+    adicionar_mov_rot,
+    add_mensalista,
+    adicionar_mov_mensalista,
+    update_pessoa,
+    update_veiculo,
+    update_mov_rot,
+    update_mensalista,
+    lista_marca,
+    update_mov_mensalista,
+    delete_pessoa,
+    delete_veiculo,
+    delete_mov_rot,
+    delete_mensalista,
+    delete_mov_mensalista,
+    core_logout,
+)
 
 
 urlpatterns = [
-    path('', home, name='core_home'),
+    path('home', home, name='core_home'),
     # pessoas
     path('pessoas', lista_pessoas, name='core_lista_pessoas'),
     path('adicionar_pessoa', adicionar_pessoa, name='core_adicionar_pessoa'),
@@ -56,8 +59,14 @@ urlpatterns = [
          name='core_adicionar_mov_mensalista'),
     path('update_mov_mensalista/<int:id>', update_mov_mensalista,
          name='core_update_mov_mensalista'),
+         
     path('delete_mov_mensalista/<int:id>', delete_mov_mensalista,
          name='core_delete_mov_mensalista'),
     # marca
     path('marcas', lista_marca, name='core_marca'),
+
+    path('', include('django.contrib.auth.urls')),
+
+    path('logout', core_logout, name='core_logout'),
+
 ]

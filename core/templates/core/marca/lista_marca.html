@@ -1,25 +1,44 @@
 {% extends 'base.html' %}
+{% load bootstrap %}
 
+{% block menu %}
+    {% include 'menu.html' with ativo=6 %}
+{% endblock menu %}
 
 {% block conteudo %}
-    <h3>Marcas</h3>
-    <form action="" method="post">
-        {% csrf_token %}
-        {{form}}
-        <input type="submit" value="Criar">
-    </form>
-    <table>
-        <thead>
-            <th>Nome</th>
-        </thead>
-        <tbody>
-            {% for marca in marcas %}
-                <tr>
-                    <td>
-                        {{marca.nome}}
-                    </td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <div class="row">
+        <div class="col-sm-12">
+            <h3>Marcas</h3>
+        </div>
+    </div>
+
+    
+    <div class="row">
+        <div class="col-sm-6">
+            <form action="" method="post">
+                {% csrf_token %}
+                {{form|bootstrap}}
+                <input type="submit" value="Criar" class="btn btn-primary">
+            </form>
+        </div>
+
+        <div class="col-sm-6">
+            <table class="table text-center">
+                <thead class="thead-dark">
+                    <th>Nome</th>
+                </thead>
+                <tbody>
+                    {% for marca in marcas %}
+                        <tr>
+                            <td>
+                                {{marca.nome}}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    
 {% endblock conteudo %}

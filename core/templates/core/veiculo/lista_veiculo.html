@@ -1,36 +1,54 @@
 {% extends 'base.html' %}
+{% load bootstrap %}
 
 
-
+{% block menu %}
+    {% include 'menu.html' with ativo=2 %}
+{% endblock menu %}
+    
 {% block conteudo %}
-    <h3>Lista veiculos</h3>
-    <form action={% url 'core_adicionar_veiculo' %} method="POST">
-        {% csrf_token %}
-        {{form}}
-        <input type="submit" value="Criar">
-    </form>
-    <table>
-        <thead>
-            <th>marca</th>
-            <th>placa</th>
-            <th>cor</th>
-            
-            <th>proprietario</th>
-            <th>Update</th>
-            <th>Delete</th>
-        </thead>
-        <tbody>
-            {% for veiculo in veiculos %}
-                <tr>
-                   <td>{{veiculo.marca}}</td>
-                   <td>{{veiculo.placa}}</td>
-                   <td>{{veiculo.cor}}</td>
-                   
-                   <td>{{veiculo.proprietario}}</td>
-                    <td><a href={% url 'core_update_veiculo' veiculo.id %}>Update</a></td>
-                    <td><a href={% url 'core_delete_veiculo' veiculo.id %}>Delete</a></td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <div class="row"><!-- titulo -->
+        <div class="col-sm-12 justify-content-center d-flex">
+            <h3>Lista veiculos</h3>
+        </div>
+    </div>
+    
+    <div class="row"><!-- formulario e tabela  -->
+        <div class="col-sm-6">
+            <form action={% url 'core_adicionar_veiculo' %} method="POST">
+                {% csrf_token %}
+                {{form|bootstrap}}
+                <input type="submit" value="Criar">
+            </form>
+        </div>
+
+        <div class="col-sm-6">
+            <table class="table">
+                <thead>
+                    <th>marca</th>
+                    <th>placa</th>
+                    <th>cor</th>
+                    
+                    <th>proprietario</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                </thead>
+                <tbody>
+                    {% for veiculo in veiculos %}
+                        <tr>
+                        <td>{{veiculo.marca}}</td>
+                        <td>{{veiculo.placa}}</td>
+                        <td>{{veiculo.cor}}</td>
+                        
+                        <td>{{veiculo.proprietario}}</td>
+                            <td><a href={% url 'core_update_veiculo' veiculo.id %}>Update</a></td>
+                            <td><a href={% url 'core_delete_veiculo' veiculo.id %}>Delete</a></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    
 {% endblock conteudo %}

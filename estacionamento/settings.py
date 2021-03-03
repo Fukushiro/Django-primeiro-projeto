@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'bootstrapform',
     'core',
 ]
 
@@ -77,7 +78,7 @@ WSGI_APPLICATION = 'estacionamento.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 default_dburl = 'sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3')
-d = {
+d = {  # inutil
     'ENGINE': 'django.db.backends.sqlite3',
     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 }
@@ -125,5 +126,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
-    'staticfiles/css',
+    os.path.join(BASE_DIR, 'static')
 ]
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'core_home'
+
+LOGOUT_REDIRECT_URL = 'core_home'

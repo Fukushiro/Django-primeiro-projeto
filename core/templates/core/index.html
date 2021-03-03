@@ -1,6 +1,20 @@
 {% extends 'base.html' %}
 
 
+{% block menu %}
+    {% include 'menu.html' with ativo=0%}
+{% endblock menu %}
+    
 {% block conteudo %}
-    <h3>Ola {{usuario.username}}</h3>
+    <div class="row">
+        <div class="col-sm-12 justify-content-center d-flex">
+            <h3> 
+                {% if  usuario.username != ""%}
+                    Ola {{usuario.username}}
+                {% else %}          
+                    Não logado             
+                {% endif %}
+            </h3>
+        </div>
+    </div>
 {% endblock conteudo %}

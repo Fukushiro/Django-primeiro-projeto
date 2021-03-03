@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+
+
+{% block conteudo %}
+    <div class="row">
+        <div class="col-sm-12">
+            <h3>Deletar {{objeto}}</h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <form action="" method="post">
+                {% csrf_token %}
+                <input type="submit" value="Confirmar" class="btn btn-danger">
+            </form>
+        </div>
+    </div>
+    
+{% endblock conteudo %}

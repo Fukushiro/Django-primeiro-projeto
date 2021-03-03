@@ -1,33 +1,52 @@
 {% extends 'base.html' %}
+{% load bootstrap %}
 
-
+{% block menu %}
+    {% include 'menu.html' with ativo=1%}
+{% endblock menu %}
+    
 {% block conteudo %}
-    <h3>Lista pessoas</h3>  
+    
+    <div class="row ">
+        <div class="col-sm-12  justify-content-center d-flex">
+            <h3>Lista pessoas</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <form  action={% url 'core_adicionar_pessoa' %} method="POST">
+                {% csrf_token %}
+                {{form|bootstrap}}
+                
+                <input type="submit" value="Inserir" class="btn btn-primary" style="width:100%">
+                    
+            </form>
+        </div>
+        <div class="col-sm-6 justify-content-center d-flex">
+            <table class='table text-center'>
+                    <thead>
+                        <th>Nome</th>
+                        <th>Endereco</th>
+                        <th>telefone</th>
+                        <th>update</th>
+                        <th>delete</th>
+                    </thead>
+                    <tbody>
+                        {% for pessoa in lista_pessoas %}
+                            <tr>
+                                <td>{{pessoa.nome}}</td>
+                                <td>{{pessoa.endereco}}</td>
+                                <td>{{pessoa.telefone}}</td>
+                                <td><a style="color:green" href={% url 'core_update_pessoa' pessoa.id %}>Update</a></td>
+                                <td><a style="color:red" href={% url 'core_delete_pessoa' pessoa.id %}>Delete</a></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+        </div>
+    </div>
+    
 
-    <form action={% url 'core_adicionar_pessoa' %} method="POST">
-        {% csrf_token %}
-        {{form}}
-        <input type="submit" value="Inserir">
-    </form>
-
-    <table>
-        <thead>
-            <th>Nome</th>
-            <th>Endereco</th>
-            <th>telefone</th>
-            <th>update</th>
-            <th>delete</th>
-        </thead>
-        <tbody>
-            {% for pessoa in lista_pessoas %}
-                <tr>
-                    <td>{{pessoa.nome}}</td>
-                    <td>{{pessoa.endereco}}</td>
-                    <td>{{pessoa.telefone}}</td>
-                    <td><a href={% url 'core_update_pessoa' pessoa.id %}>Update</a></td>
-                    <td><a href={% url 'core_delete_pessoa' pessoa.id %}>Delete</a></td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    
+    </div>
 {% endblock conteudo %}

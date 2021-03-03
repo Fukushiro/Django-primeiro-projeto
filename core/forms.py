@@ -15,26 +15,39 @@ class DateTimeInput(forms.DateTimeInput):
     input_type = 'datetime-local'
     #input_formats = ['%y-%m-%dT%H:%M']
     # format = '%y-%m-%dT%H:%M'
-
-
-pass
+    pass
 
 
 class DateInput(forms.DateInput):
     input_type = 'date'
     attrs = {'value': datetime.datetime.now().strftime("%d-%m-%Y")}
 
+
 # forms
 # pessoas
 
 
 class PessoaForm(ModelForm):
+
     class Meta:
         model = Pessoa
         fields = '__all__'
 
+    def __init__(self, *args, **kwargs):
+        super(PessoaForm, self).__init__(*args, **kwargs)
+
+        self.fields['nome'].widget = forms.TextInput(
+            attrs={'placeholder': 'nome'})
+
+        self.fields['endereco'].widget = forms.TextInput(
+            attrs={'placeholder': 'endereço'})
+
+        self.fields['telefone'].widget = forms.TextInput(
+            attrs={'placeholder': 'telefone'})
 
 # veiculos
+
+
 class VeiculoForm(ModelForm):
     class Meta:
         model = Veiculo

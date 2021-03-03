@@ -1,12 +1,16 @@
 {% extends 'base.html' %}
 
 
+{% block menu %}
+    {% include 'menu.html' with ativo=4 ativo_mensalista=1 %}
+{% endblock menu %}
+    
 {% block conteudo %}
     <h3>Lista mensalista</h3>
     <form action={% url 'core_adicionar_mensalista' %} method="post">
         {% csrf_token %}
         {{form}}
-        <input type="submit" value="Criar">
+        <input type="submit" value="Criar" class="btn btn-primary">
     </form>
     <table style="text-align : center">
         <thead>

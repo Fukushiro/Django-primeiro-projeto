@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse
 
 from core.models import (Pessoa,
@@ -15,13 +16,14 @@ from core.forms import (PessoaForm,
                         MensalistaForm,
                         MovMensalistaForm,
                         MarcaForm,)
-
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate
 from decouple import config
 import datetime
 # Create your views here.
 
 
+@login_required
 def home(request):
     context = {
         'usuario': request.user,
@@ -32,9 +34,11 @@ def home(request):
 # pessoas
 
 
+@login_required
 def lista_pessoas(request):
     pessoas = Pessoa.objects.all()
     form = PessoaForm()
+
     context = {
         'lista_pessoas': pessoas,
         'form': form,
@@ -74,7 +78,11 @@ def delete_pessoa(request, id):
         pessoa.delete()
         return redirect('core_lista_pessoas')
     else:
-        return render(request, 'core/pessoa/delete_pessoa_confirm.html')
+
+        c = {
+            'objeto': pessoa,
+        }
+        return render(request, 'core/delete_confirm.html', c)
 # veiculos
 
 
@@ -126,7 +134,10 @@ def delete_veiculo(request, id):
         veiculo.delete()
         return redirect('core_lista_veiculos')
     else:
-        return render(request, 'core/veiculo/delete_veiculo_confirm.html')
+        c = {
+            'objeto': veiculo,
+        }
+        return render(request, 'core/delete_confirm.html', c)
 # rotativos
 
 
@@ -175,9 +186,9 @@ def delete_mov_rot(request, id):
         return redirect('core_mov_rot')
     else:
         c = {
-
+            'objeto': mov_rot,
         }
-        return render(request, 'core/mov_rotativo/delete_mov_rotativo_confirm.html', c)
+        return render(request, 'core/delete_confirm.html', c)
 # mensalistas
 
 
@@ -220,8 +231,10 @@ def delete_mensalista(request, id):
         mensalista.delete()
         return redirect('core_lista_mensalista')
     else:
-        c = {}
-        return render(request, 'core/mensalista/delete_mensalista_confirm.html', c)
+        c = {
+            'objeto': mensalista,
+        }
+        return render(request, 'core/delete_confirm.html', c)
 # movimento mensalista
 
 
@@ -265,8 +278,10 @@ def delete_mov_mensalista(request, id):
         mov_mensalista.delete()
         return redirect('core_mov_mensalista')
     else:
-        c = {}
-        return render(request, 'core/mov_mensalista/delete_mov_mensalista_confirm.html', c)
+        c = {
+            'objeto': mov_mensalista,
+        }
+        return render(request, 'core/delete_confirm.html', c)
 # marca
 
 
@@ -284,3 +299,9 @@ def lista_marca(request):
 
     }
     return render(request, 'core/marca/lista_marca.html', context)
+
+
+def core_logout(request):
+    logout(request)
+
+    return redirect('login')

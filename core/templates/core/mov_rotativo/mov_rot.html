@@ -1,14 +1,28 @@
 {% extends 'base.html' %}
+{% load bootstrap %}
 
-
+{% block menu %}
+    {% include 'menu.html' with ativo=3 %}
+{% endblock menu %}
+    
 {% block conteudo %}
-    <h3>Movimento rotativo</h3>
-    <form action={% url 'core_add_mov_rot' %} method="POST">
-        {% csrf_token %}
-        {{form}}
-        <input type="submit" value="Criar">
-    </form>
-    <table style="text-align : center">
+    <div class="row">
+        <div class="col-sm-12">
+            <h3>Movimento rotativo</h3>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <form action={% url 'core_add_mov_rot' %} method="POST">
+                {% csrf_token %}
+                {{form|bootstrap}}
+                <input type="submit" value="Criar" style="width:100%" class="btn btn-primary">
+            </form>
+        </div>
+
+        <div class="col-sm-6">
+            <table class="table text-center">
         <thead>
             <th>checkin</th>
             <th>checkout</th>
@@ -22,7 +36,13 @@
             {% for movimento in movimentos %}
                 <tr>
                     <td>{{movimento.checkin}}</td>
-                    <td>{{movimento.checkout}}</td>
+                    <td>
+                    {% if movimento.checkout != none %}
+                        {{movimento.checkout}}
+                    {% else %}
+                        Não realizado
+                    {% endif %}
+                        </td>
                     <td>{{movimento.valor_hora}}</td>
                     <td>{{movimento.veiculo}}</td>
                     <td>
@@ -38,4 +58,10 @@
             {% endfor %}
         </tbody>
     </table>
+        </div>
+    </div>
+    
+    
+
+    
 {% endblock conteudo %}
