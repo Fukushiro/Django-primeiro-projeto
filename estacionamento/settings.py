@@ -29,7 +29,7 @@ SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = ['localhost', 'dangoteste.herokuapp.com',
-                 'estacionamentoapp3.herokuapp.com/']
+                 'estacionamentoapp3.herokuapp.com']
 
 
 # Application definition
